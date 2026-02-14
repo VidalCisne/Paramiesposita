@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Para mi esposita 💘</title>
+  <style>
+    :root{
+      --bg1:#0b0b14;
+      --bg2:#1a1026;
+      --stroke:#ffffff25;
+      --text:#f7f7fb;
+      --muted:#cfcfe6;
+      --pink:#ff4d8d;
+      --pink2:#ff2d55;
+      --gold:#ffd1dc;
+      --shadow: 0 18px 60px #00000066;
+      --radius: 22px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 20% 20%, #ff4d8d2a 0%, transparent 60%),
+        radial-gradient(1000px 700px at 80% 30%, #7c4dff22 0%, transparent 55%),
+        radial-gradient(900px 700px at 50% 90%, #22c55e18 0%, transparent 55%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      overflow-x:hidden;
+    }
+
+    /* floating hearts */
+    .hearts{
+      position:fixed; inset:0; pointer-events:none; overflow:hidden;
+      filter: drop-shadow(0 10px 20px #00000055);
+      opacity:.9;
+    }
+    .heart{
+      position:absolute;
+      width:18px; height:18px;
+      background: linear-gradient(135deg, var(--pink), #ff87b2);
+      transform: rotate(45deg);
+      border-radius: 4px;
+      animation: floatUp linear infinite;
+    }
+    .heart::before, .heart::after{
+      content:"";
+      position:absolute;
+      width:18px; height:18px;
+      background: inherit;
+      border-radius: 50%;
+    }
+    .heart::before{ left:-9px; top:0 }
+    .heart::after{ top:-9px; left:0 }
+    @keyframes floatUp{
+      from{ transform: translateY(110vh) rotate(45deg) scale(.9); opacity:0 }
+      10%{opacity:.9}
+      to{ transform: translateY(-20vh) rotate(45deg) scale(1.3); opacity:0 }
+    }
+
+    .wrap{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 28px 16px 60px;
+      position:relative;
+    }
+
+    .card{
+      width:min(980px, 95vw);
+      background: linear-gradient(180deg, #ffffff14, #ffffff07);
+      border:1px solid var(--stroke);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+      backdrop-filter: blur(10px);
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding: 14px 16px;
+      border-bottom:1px solid var(--stroke);
+      background: #ffffff09;
+    }
+    .dots{ display:flex; gap:8px; }
+    .dot{ width:10px; height:10px; border-radius:50%; background:#ffffff30 }
+    .dot:nth-child(1){ background:#ff5f57 }
+    .dot:nth-child(2){ background:#febc2e }
+    .dot:nth-child(3){ background:#28c840 }
+    .title{
+      margin-left:auto;
+      font-size:13px;
+      color:var(--muted);
+      letter-spacing:.4px;
+    }
+
+    /* FOTO GRANDE ARRIBA (la “otra” en otro lugar) */
+    .hero{
+      position:relative;
+      height: 300px;
+      border-bottom:1px solid var(--stroke);
+      background:#ffffff08;
+      overflow:hidden;
+    }
+    .hero img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+      filter:saturate(1.08) contrast(1.05);
+      transform: scale(1.02);
+    }
+    .hero::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, transparent 10%, #00000085 100%);
+      pointer-events:none;
+    }
+    .heroText{
+      position:absolute;
+      left:18px; right:18px; bottom:16px;
+      z-index:2;
+      text-align:left;
+    }
+    .heroText .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border:1px solid #ffffff2a;
+      background:#00000055;
+      backdrop-filter: blur(8px);
+      font-size:12px;
+      color:#fff;
+      margin-bottom:10px;
+    }
+    .heroText h2{
+      margin:0;
+      font-size: clamp(18px, 3.2vw, 28px);
+      line-height:1.15;
+      letter-spacing:.2px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:0;
+    }
+    @media (max-width: 860px){
+      .grid{ grid-template-columns: 1fr; }
+      .hero{ height: 260px; }
+    }
+
+    .left{ padding: 26px 26px 22px; }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 14px;
+      border:1px solid #ffffff26;
+      border-radius: 999px;
+      background: #ffffff0e;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+    .spark{
+      width:10px; height:10px;
+      border-radius:50%;
+      background: radial-gradient(circle, #fff 0%, var(--pink) 35%, transparent 70%);
+      box-shadow: 0 0 18px var(--pink);
+    }
+
+    h1{
+      margin: 6px 0 10px;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height:1.06;
+      letter-spacing: .2px;
+    }
+    .subtitle{
+      color: var(--muted);
+      font-size: 15.5px;
+      line-height: 1.55;
+      margin: 0 0 18px;
+      max-width: 52ch;
+    }
+
+    .letter{
+      margin-top: 10px;
+      padding: 18px 18px;
+      border-radius: 18px;
+      background: #0b0b1418;
+      border: 1px solid #ffffff18;
+      position:relative;
+      overflow:hidden;
+    }
+    .letter::after{
+      content:"";
+      position:absolute; inset:-40%;
+      background: radial-gradient(circle at 30% 30%, #ff4d8d33 0%, transparent 55%),
+                  radial-gradient(circle at 70% 60%, #7c4dff22 0%, transparent 55%);
+      transform: rotate(10deg);
+      animation: shimmer 8s ease-in-out infinite;
+    }
+    @keyframes shimmer{
+      0%,100%{ transform: rotate(8deg) translateY(0); opacity:.8 }
+      50%{ transform: rotate(12deg) translateY(-10px); opacity:1 }
+    }
+    .letter p{
+      position:relative;
+      z-index:1;
+      margin:0;
+      color:#f0f0ff;
+      line-height:1.75;
+      font-size: 15.5px;
+    }
+    .signature{
+      margin-top: 14px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .actions{
+      margin-top: 16px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:center;
+    }
+    .btn{
+      appearance:none;
+      border:none;
+      cursor:pointer;
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-weight: 700;
+      letter-spacing:.2px;
+      transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+      position:relative;
+      user-select:none;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+    }
+    .btn:active{ transform: translateY(1px) scale(.99); }
+    .btn-primary{
+      background: linear-gradient(135deg, var(--pink2), var(--pink));
+      color:white;
+      box-shadow: 0 16px 40px #ff2d5533;
+    }
+    .btn-primary:hover{ filter: brightness(1.05); transform: translateY(-1px); }
+    .btn-ghost{
+      background:#ffffff10;
+      color: #fff;
+      border:1px solid #ffffff22;
+    }
+    .btn-ghost:hover{ transform: translateY(-1px); box-shadow: 0 12px 30px #00000033; }
+    .tiny{
+      font-size: 12.5px;
+      color: var(--muted);
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .right{
+      padding: 22px;
+      border-left:1px solid var(--stroke);
+      background: linear-gradient(180deg, #ffffff0a, transparent);
+      position:relative;
+    }
+    @media (max-width: 860px){
+      .right{ border-left:none; border-top:1px solid var(--stroke); }
+    }
+
+    /* SOLO 6 FOTOS en la galería */
+    .gallery{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    .photo{
+      border-radius: 18px;
+      overflow:hidden;
+      border:1px solid #ffffff1f;
+      background:#ffffff08;
+      min-height: 160px;
+      position:relative;
+      transform: translateZ(0);
+    }
+    .photo img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+      filter: saturate(1.1) contrast(1.05);
+      transform: scale(1.02);
+      transition: transform .35s ease;
+    }
+    .photo:hover img{ transform: scale(1.09); }
+    .photo .tag{
+      position:absolute;
+      left:12px;
+      top:12px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      background:#00000055;
+      border:1px solid #ffffff2a;
+      backdrop-filter: blur(8px);
+    }
+
+    .panel{
+      margin-top: 14px;
+      padding: 14px 14px;
+      border-radius: 18px;
+      background:#ffffff0b;
+      border:1px solid #ffffff1f;
+    }
+    .panel h3{
+      margin: 0 0 8px;
+      font-size: 14px;
+      color: var(--muted);
+      letter-spacing: .4px;
+      text-transform: uppercase;
+    }
+    .question{
+      font-size: 17px;
+      margin: 0 0 12px;
+      font-weight: 900;
+      line-height:1.25;
+    }
+    .yn{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+      position:relative;
+      min-height: 52px;
+    }
+
+    /* modal */
+    .modal{
+      position:fixed; inset:0;
+      display:none;
+      place-items:center;
+      padding: 18px;
+      background: #00000088;
+      backdrop-filter: blur(8px);
+      z-index: 50;
+    }
+    .modal.show{ display:grid; }
+    .modal-card{
+      width:min(780px, 95vw);
+      border-radius: 22px;
+      border:1px solid #ffffff26;
+      background: linear-gradient(180deg, #ffffff14, #ffffff08);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .modal-head{
+      padding: 14px 16px;
+      border-bottom:1px solid #ffffff1f;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      background:#ffffff0a;
+    }
+    .modal-head strong{ letter-spacing:.2px; }
+    .x{
+      cursor:pointer;
+      width:38px;height:38px;
+      border-radius: 12px;
+      border:1px solid #ffffff25;
+      background:#ffffff0e;
+      color:#fff;
+      font-size:18px;
+    }
+    .modal-body{ padding: 18px 18px 20px; }
+    .loveWall{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top: 12px;
+    }
+    .pill{
+      padding: 10px 12px;
+      border-radius: 999px;
+      background:#ffffff10;
+      border:1px solid #ffffff20;
+      font-weight: 700;
+      letter-spacing:.2px;
+      animation: pop .6s ease both;
+    }
+    @keyframes pop{
+      from{ transform: translateY(6px) scale(.98); opacity:0 }
+      to{ transform: translateY(0) scale(1); opacity:1 }
+    }
+
+    /* confetti */
+    .confetti{
+      position:fixed; inset:0;
+      pointer-events:none;
+      z-index: 60;
+      overflow:hidden;
+      display:none;
+    }
+    .confetti.show{ display:block; }
+    .conf{
+      position:absolute;
+      width:10px;height:14px;
+      opacity:.9;
+      transform: rotate(0deg);
+      animation: fall linear forwards;
+    }
+    @keyframes fall{
+      from{ transform: translateY(-10vh) rotate(0deg); }
+      to{ transform: translateY(110vh) rotate(720deg); }
+    }
+
+    .footer{
+      padding: 16px 22px 22px;
+      border-top:1px solid var(--stroke);
+      display:flex;
+      gap:10px;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      color: var(--muted);
+      font-size: 12.5px;
+    }
+
+    .pulse{
+      display:inline-block;
+      width:10px;height:10px;border-radius:50%;
+      background: var(--pink);
+      box-shadow: 0 0 18px var(--pink);
+      animation: beat 1.15s infinite ease-in-out;
+      margin-right:6px;
+    }
+    @keyframes beat{
+      0%,100%{ transform: scale(.85); opacity:.8 }
+      50%{ transform: scale(1.25); opacity:1 }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="hearts" id="hearts"></div>
+  <div class="confetti" id="confetti"></div>
+
+  <main class="wrap">
+    <section class="card" aria-label="Carta de San Valentín">
+
+      <div class="topbar">
+        <div class="dots">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        </div>
+        <div class="title">14 de Febrero • Para mi esposita</div>
+      </div>
+
+      <!-- LA “OTRA” FOTO EN OTRO LUGAR: HERO ARRIBA -->
+      <div class="hero">
+        <img src="img/1.jpg" alt="Foto principal" />
+        <div class="heroText">
+          <div class="chip">💘 Nuestro amor</div>
+          <h2>Si tuviera que elegir una vida…<br>te elijo a ti. Y en las demás también.</h2>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="left">
+          <div class="badge"><span class="spark"></span> Carta secreta (solo para tus ojos)</div>
+
+          <h1>Mi amor, hoy vengo a recordarte algo…<br>que eres mi lugar favorito. 💘</h1>
+
+          <p class="subtitle">
+            Esta página es solo para ti, mi esposita. Porque lo que siento por ti no me cabe en el pecho, y si pudiera lo gritaría al cielo para que el mundo entero lo supiera…
+          </p>
+
+          <div class="letter">
+            <p>
+              <strong>Amor</strong>, gracias por existir en mi vida. Gracias por tu paciencia, por tu forma de mirar,
+              por tus detalles, por hacer que lo simple se sienta especial. <br><br>
+              No quiero un amor “a ratos”. Yo te elijo en lo diario: en los días lindos y también en los días pesados.
+              Y si la vida me deja, quiero seguir sumando momentos contigo. <br><br>
+              <span class="signature">— Siempre tuyo.</span>
+            </p>
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-primary" id="playBtn">▶ Reproducir música</button>
+            <button class="btn btn-ghost" id="surpriseBtn">✨ Sorpresa</button>
+            <!--<span class="tiny"><span class="pulse"></span> Tip: el botón “No” es medio rebelde 😅</span> -->
+          </div>
+        </div>
+
+        <aside class="right">
+          <!-- SOLO 6 FOTOS -->
+          <div class="gallery">
+            <div class="photo"><span class="tag">💗</span><img src="img/2.jpg" alt="Foto 2"></div>
+            <div class="photo"><span class="tag">💞</span><img src="img/3.jpg" alt="Foto 3"></div>
+            <div class="photo"><span class="tag">✨</span><img src="img/4.jpg" alt="Foto 4"></div>
+            <div class="photo"><span class="tag">💘</span><img src="img/6.jpg" alt="Foto 6"></div>
+            <div class="photo"><span class="tag">🌙</span><img src="img/7.jpg" alt="Foto 7"></div>
+            <div class="photo"><span class="tag">🤍</span><img src="img/5.jpg" alt="Foto 1"></div>
+          </div>
+
+          <div class="panel">
+            <h3>La pregunta</h3>
+
+            <!-- CAMBIÉ LA PREGUNTA -->
+            <p class="question">¿Quieres ser el amor eterno para siempre y en las demás vidas? 💞</p>
+
+            <div class="yn" id="ynZone">
+              <button class="btn btn-primary" id="yesBtn">Sí 💘</button>
+              <button class="btn btn-ghost" id="noBtn">No 🙃</button>
+            </div>
+
+            <p class="tiny" style="margin-top:10px">
+              Te amo con todo lo que soy. ❤️
+            </p>
+          </div>
+        </aside>
+      </div>
+
+      <div class="footer">
+        <span>Hecho con amor (y un poquito de magia) ✨</span>
+        <span>Paramiesposita.html • audio/SUMMER WINE.mp3 • img/*.jpg</span>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal sorpresa -->
+  <div class="modal" id="modal">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-label="Sorpresa">
+      <div class="modal-head">
+        <strong>Para ti, mi vida 💗</strong>
+        <button class="x" id="closeModal" aria-label="Cerrar">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="margin:0; color:var(--muted); line-height:1.6;">
+          Si hoy tuviera que elegir un lugar seguro… te elijo a ti.
+          Si tuviera que elegir un futuro… te elijo a ti.
+          Y si tuviera que elegir una vez más… también te elijo a ti.
+        </p>
+
+        <div style="margin-top:12px; font-weight:800; font-size:18px;">
+          “Te amo” en muchos idiomas:
+        </div>
+        <div class="loveWall" id="loveWall"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUDIO -->
+  <audio id="song" preload="auto">
+    <source src="audio/SUMMER WINE.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // 1) Corazones flotando
+    const hearts = document.getElementById("hearts");
+    const makeHeart = () => {
+      const h = document.createElement("div");
+      h.className = "heart";
+      const size = 10 + Math.random()*18;
+      h.style.width = size + "px";
+      h.style.height = size + "px";
+      h.style.left = (Math.random()*100) + "vw";
+      h.style.animationDuration = (6 + Math.random()*7) + "s";
+      h.style.animationDelay = (Math.random()*2) + "s";
+      hearts.appendChild(h);
+      setTimeout(()=>h.remove(), 14000);
+    };
+    for(let i=0;i<22;i++) setTimeout(makeHeart, i*220);
+    setInterval(makeHeart, 520);
+
+    // 2) Modal + “Te amo” en idiomas
+    const modal = document.getElementById("modal");
+    const loveWall = document.getElementById("loveWall");
+    const phrases = [
+      "Te amo","I love you","Je t’aime","Ti amo","Ich liebe dich","Eu te amo","愛してる","사랑해요","我爱你",
+      "Я тебя люблю","Seni seviyorum","Ik hou van jou","Jag älskar dig","Jeg elsker deg","Kocham cię",
+      "Σ’αγαπώ","אני אוהב/ת אותך","أحبك","Mahal kita","Aku cinta kamu","ฉันรักคุณ","Tôi yêu bạn",
+      "Ninakupenda","Mi amas vin","T'estimo","Te iubesc","Volim te","Ljubim te","मैं तुमसे प्यार करता/करती हूँ"
+    ];
+
+    function openModal(){
+      modal.classList.add("show");
+      loveWall.innerHTML = "";
+      phrases.forEach((t, idx)=>{
+        const pill = document.createElement("div");
+        pill.className = "pill";
+        pill.style.animationDelay = (idx*0.04)+"s";
+        pill.textContent = t;
+        loveWall.appendChild(pill);
+      });
+    }
+    function closeModal(){ modal.classList.remove("show"); }
+
+    document.getElementById("surpriseBtn").addEventListener("click", openModal);
+    document.getElementById("closeModal").addEventListener("click", closeModal);
+    modal.addEventListener("click", (e)=>{ if(e.target === modal) closeModal(); });
+
+    // 3) Botón NO que se escapa
+    const noBtn = document.getElementById("noBtn");
+    const ynZone = document.getElementById("ynZone");
+
+    function dodge(){
+      const zoneRect = ynZone.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
+      const maxX = zoneRect.width - btnRect.width;
+      const maxY = zoneRect.height - btnRect.height;
+
+      const x = Math.max(0, Math.random()*maxX);
+      const y = Math.max(0, Math.random()*maxY);
+
+      noBtn.style.position = "absolute";
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+      noBtn.style.transition = "transform .12s ease, left .12s ease, top .12s ease";
+      noBtn.style.transform = "rotate(" + ((Math.random()*10)-5) + "deg)";
+    }
+    noBtn.addEventListener("mouseenter", dodge);
+    noBtn.addEventListener("click", (e)=>{ e.preventDefault(); dodge(); });
+
+    // 4) Confetti cuando dice que sí
+    const confetti = document.getElementById("confetti");
+    function popConfetti(){
+      confetti.classList.add("show");
+      confetti.innerHTML = "";
+      const pieces = 140;
+      for(let i=0;i<pieces;i++){
+        const c = document.createElement("div");
+        c.className = "conf";
+        c.style.left = (Math.random()*100) + "vw";
+        c.style.top = (-10 - Math.random()*30) + "vh";
+        c.style.background = `hsl(${Math.random()*360}, 90%, 65%)`;
+        c.style.animationDuration = (2.5 + Math.random()*2.7) + "s";
+        c.style.transform = `rotate(${Math.random()*180}deg)`;
+        confetti.appendChild(c);
+        c.style.animationName = "fall";
+      }
+      setTimeout(()=>confetti.classList.remove("show"), 4200);
+    }
+
+    document.getElementById("yesBtn").addEventListener("click", ()=>{
+      popConfetti();
+      openModal();
+    });
+
+    // 5) Música (play/pausa)
+    const song = document.getElementById("song");
+    const playBtn = document.getElementById("playBtn");
+    let playing = false;
+
+    playBtn.addEventListener("click", async ()=>{
+      try{
+        if(!playing){
+          await song.play();
+          playing = true;
+          playBtn.textContent = "⏸ Pausar música";
+        }else{
+          song.pause();
+          playing = false;
+          playBtn.textContent = "▶ Reproducir música";
+        }
+      }catch(err){
+        alert("Tu navegador bloqueó el autoplay. Toca otra vez el botón para reproducir.");
+      }
+    });
+  </script>
+
+</body>
+</html>
